@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>select</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <select ng-init="selectedUser = users[0]" ng-model="selectedUser" ng-options="user.name for user in users">
+    </select>
+    <p>使用ng-options指令，选择的值是一个对象：{{selectedUser}}</p>
+    <hr>
+    <select ng-init="selectedUser2 = users[1].id + ''" ng-model="selectedUser2">
+      <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
+    </select>
+    <p>使用ng-repeat指令，选择的值是一个字符串：{{selectedUser2}}</p>
+  </div>
+  <script>
+    var app = angular.module('myApp', [])
+    app.controller('myCtrl', function($scope) {
+      $scope.users = [{
+        id: 1,
+        name: 'tom'
+      }, {
+        id: 2,
+        name: 'yvan'
+      }, {
+        id: 3,
+        name: 'james'
+      }]
+    })
+  </script>
+</body>
+</html>
