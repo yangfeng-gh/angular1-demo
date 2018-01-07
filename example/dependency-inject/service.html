@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>angular依赖注入：service</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.6.8/angular.min.js"></script>
+</head>
+<body>
+<h3>可以在service中注入service</h3>
+<div ng-app="app" ng-controller="myCtrl">
+  <p>{{ data }}</p>
+</div>
+<script>
+  // 定义一个模块
+  var app = angular.module('app', []);
+  
+  // 创建一个service
+  app.service('MathService', function() {
+    this.multiply = function(a, b) {
+      return a * b;
+    }
+  })
+  
+  // 在service中注入service
+  app.service('CalService', function(MathService) {
+    this.square = function (r) {
+      return MathService.multiply(r, r);
+    }
+  })
+  
+  // 在controller中使用CalService
+  app.controller('myCtrl', function($scope, CalService) {
+    $scope.data = CalService.square(5);
+  })
+
+</script>
+</body>
+</html>

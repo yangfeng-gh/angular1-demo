@@ -73,7 +73,7 @@ this server is:
 npm start
 ```
 
-Now browse to the app at [`localhost:8000/index.html`][local-app-url].
+Now browse to the app at [`localhost:8000/lowercase.html`][local-app-url].
 
 
 ## Directory Layout

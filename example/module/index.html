@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<ul>
+  <li>模块定义了一个应用程序。</li>
+  <li>模块是应用程序中不同部分的容器</li>
+  <li>模块是应用控制器的容器。</li>
+  <li>控制器通常属于一个模块。</li>
+</ul>
+
+<div ng-app="app" ng-controller="myCtrl">
+  <p>{{ msg | reverse }}</p>
+  
+  <my-directive></my-directive>
+</div>
+<script>
+  // 创建模块
+  var app = angular.module('app', []);
+  // 添加控制器
+  app.controller('myCtrl', function($scope) {
+    $scope.msg = '控制器创建成功'
+  })
+  
+  // 添加指令
+  app.directive('myDirective', function() {
+    return {
+      template: '<p>我的指令构造器中创建</p>',
+      restrict: 'EA'
+    }
+  })
+  
+  // 添加过滤器
+  app.filter('reverse', function() {
+    return function(text) {
+      return text.split('').reverse().join('');
+    }
+  })
+  
+</script>
+
+</body>
+</html>

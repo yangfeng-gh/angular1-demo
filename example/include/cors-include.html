@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-include</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-include="'http://localhost:8880/cors-demo/index.jsp'"></div>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.config(function ($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'http://localhost:8880/cors-demo/**'
+    ])
+  })
+</script>
+</body>
+</html>

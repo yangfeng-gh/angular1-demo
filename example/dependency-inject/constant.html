@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>angular依赖注入：value</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+  <h3>constant(常量)用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的。</h3>
+  <div ng-app="mainApp" ng-controller="CalcController">
+    <input type="text" ng-model="number">
+    <p>{{ result }}</p>
+  </div>
+  <script>
+    var mainApp = angular.module("mainApp", []);
+  
+    mainApp.config(function($provide) {
+      $provide.provider('MathService', function() {
+        this.$get = function() {
+          var factory = {};
+        
+          factory.multiply = function(a, b) {
+            return a * b;
+          }
+          return factory;
+        };
+      });
+    });
+  
+    mainApp.value("defaultInput", 5);
+    mainApp.constant("configParam", "constant value");
+  
+    mainApp.service('CalcService', function(MathService){
+      this.square = function(a) {
+        return MathService.multiply(a,a);
+      }
+    });
+  
+    mainApp.controller('CalcController', function($scope, CalcService, defaultInput) {
+      $scope.number = defaultInput;
+      $scope.result = CalcService.square($scope.number);
+    
+      $scope.square = function() {
+        $scope.result = CalcService.square($scope.number);
+      }
+    });
+  </script>
+</body>
+</html>

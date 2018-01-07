@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="tableCtrl">
+  <form action="">
+    name:
+    <input type="text" ng-model="user.name"><br>
+    gender:
+    <input type="radio" ng-model="user.gender" value="male">male
+    <input type="radio" ng-model="user.gender" value="female">female
+    <br>
+    hobby:
+    <ul>
+      <li ng-repeat="x in hobbies">
+        <input type="checkbox" name="{{x}}" ng-checked="isSelected(x)" ng-click="updateSelection($event, x)">{{ x }}
+      </li>
+    </ul>
+    education:
+    <select ng-model="user.education" ng-options="x for x in educations"></select> <br>
+    <input type="button" ng-click="reset()" value="重置"> <br>
+  </form>
+  <p>{{user}}</p>
+</div>
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('tableCtrl', function($scope) {
+    var user = {
+      name: 'yvan',
+      gender: 'male',
+      hobby: ['basketball', 'badminton'],
+      education: '本科'
+    }
+    
+    $scope.hobbies = ['basketball', 'badminton', 'volleyball'];
+    $scope.educations = ['本科', '大专', '中专'];
+    $scope.user = user;
+  
+    var updateSelected = function(action, value) {
+      var index = $scope.user.hobby.indexOf(value);
+      if (action === 'add' && index === -1) {
+        $scope.user.hobby.push(value);
+      }
+      if (action === 'remove' && index !== -1) {
+        $scope.user.hobby.splice(index, 1);
+      }
+    }
+    
+    $scope.updateSelection = function($event, value) {
+      var checkbox = $event.target;
+      var action = checkbox.checked ? 'add' : 'remove';
+      updateSelected(action, value);
+    }
+    
+    $scope.isSelected = function(value) {
+      return $scope.user.hobby.indexOf(value) !== -1;
+    }
+    
+    $scope.reset = function() {
+      $scope.user = angular.copy(user);
+    }
+  })
+</script>
+
+</body>
+</html>

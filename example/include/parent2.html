@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-include</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+  <div ng-include="'child2.html'"></div>
+</div>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    $scope.names = [
+      {name:'Bill',country:'Norway'},
+      {name:'Linus',country:'Sweden'},
+      {name:'Steve',country:'Denmark'}
+    ]
+  });
+</script>
+</body>
+</html>

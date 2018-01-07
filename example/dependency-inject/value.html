@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>angular依赖注入：value</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+  <h3>Value 是一个简单的 javascript 对象，用于向控制器传递值（配置阶段）：</h3>
+  <div ng-app="app" ng-controller="myCtrl">
+    <p>{{ data }}</p>
+  </div>
+  <script>
+    // 定义一个模块
+    var app = angular.module('app', []);
+    
+    // 创建value对象"defaultInput",并传递数据
+    app.value('defaultInput', 5);
+    
+    // 将"defaultInput"注入到控制器
+    app.controller('myCtrl', function($scope, defaultInput) {
+      $scope.data = defaultInput;
+    })
+  </script>
+</body>
+</html>
