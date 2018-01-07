@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$http 是 AngularJS 中的一个核心服务，用于读取远程服务器的数据。</title>
+  <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp">
+  <p ng-controller="siteCtrl">
+    siteCtrl: {{data}}
+  </p>
+  <br>
+  <p ng-controller="siteCtrl2">
+    siteCtrl2: {{data}}
+  </p>
+</div>
+<script>
+  // AngularJS1.5 以上版本
+  var app = angular.module('myApp', []);
+
+  app.controller('siteCtrl', function($scope, $http) {
+    $http({
+      method: 'GET',
+      url: 'http://localhost:8880/cors-demo/common'
+    }).then(function successCallback(response) {
+      $scope.data = response.data;
+    }, function errorCallback(response) {
+      // 请求失败执行代码
+    });
+  
+  });
+  
+  // AngularJS1.5 以下版本
+  app.controller('siteCtrl2', function($scope, $http) {
+    $http.get("http://localhost:8880/cors-demo/common")
+    .success(function (response) {
+      $scope.data = response
+    })
+  })
+  
+</script>
+
+</body>
+</html>

@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>select</title>
-  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
 </head>
 <body>
-  <div ng-app="myApp" ng-controller="myCtrl">
-    <select ng-init="selectedUser = users[0]" ng-model="selectedUser" ng-options="user.name for user in users">
-    </select>
-    <p>使用ng-options指令，选择的值是一个对象：{{selectedUser}}</p>
-    <hr>
-    <select ng-init="selectedUser2 = users[1].id + ''" ng-model="selectedUser2">
-      <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
-    </select>
-    <p>使用ng-repeat指令，选择的值是一个字符串：{{selectedUser2}}</p>
-  </div>
-  <script>
-    var app = angular.module('myApp', [])
-    app.controller('myCtrl', function($scope) {
-      $scope.users = [{
-        id: 1,
-        name: 'tom'
-      }, {
-        id: 2,
-        name: 'yvan'
-      }, {
-        id: 3,
-        name: 'james'
-      }]
-    })
-  </script>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+  <h1>{{selectedName.first}}</h1>
+  <select ng-init="selectedName = names[0]" ng-model="selectedName" ng-options="x.first for x in names">
+  </select>
+  <p>ng-options 选择中的值是一个对象</p>
+  
+  <h1>{{selectedName2}}</h1>
+  <select ng-init="selectedName2 = names[0].last" ng-model="selectedName2">
+    <option ng-repeat="x in names" value="{{x.last}}">{{x.first}}</option>
+  </select>
+  <p>ng-repeat 有局限性，选择的值是一个字符串</p>
+</div>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    $scope.names = [
+      {first: 'Bill', last: 'Gates'},
+      {first: 'Linus', last: 'Torvalds'},
+      {first: 'Steve', last: 'Jobs'}
+    ];
+  });
+</script>
+
 </body>
 </html>

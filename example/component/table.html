@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="tableCtrl">
+  <table border="1" cellpadding="0" cellspacing="0" width="500" align="center">
+    <tr>
+      <th>序号</th>
+      <th>姓名</th>
+      <th>国家</th>
+    </tr>
+    <tr ng-repeat="x in names | orderBy : 'country'">
+      <td ng-if="$odd" style="background-color: #ccc">{{ $index + 1 }}</td>
+      <td ng-if="$even">{{ $index + 1 }}</td>
+      <td ng-if="$odd" style="background-color: #ccc">{{ x.name }}</td>
+      <td ng-if="$even">{{ x.name }}</td>
+      <td ng-if="$odd" style="background-color: #ccc">{{ x.country | uppercase}}</td>
+      <td ng-if="$even">{{ x.country | uppercase }}</td>
+    </tr>
+  </table>
+</div>
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('tableCtrl', function($scope) {
+    $scope.names = [
+      {name:'Bill',country:'Norway'},
+      {name:'Linus',country:'Sweden'},
+      {name:'Steve',country:'Denmark'}
+    ]
+  })
+</script>
+
+</body>
+</html>
