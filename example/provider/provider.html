@@ -21,9 +21,11 @@
   app.config(function (myProvider) {
     myProvider.setName("大圣");
   });
+  
   app.provider('myProvider', function () {
     var name = "";
     var test = {"a": 1, "b": 2};
+    
     //注意的是，setter方法必须是(set+变量首字母大写)格式
     this.setName = function (newName) {
       name = newName

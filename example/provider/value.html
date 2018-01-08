@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>value service</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="app" ng-controller="MainCtrl">
+        <p>{{fooConfig}}</p>
+    </div>
+    <script>
+        var app = angular.module('app', [])
+
+        app.config(function($provide) {
+          $provide.value('fooConfig', {
+            config1: true,
+            config2: 'Default config2 but it can changes'
+          })
+        })
+
+        // 语法糖
+        // app.value('fooConfig', {
+        //   config1: true,
+        //   config2: 'Default config2 but it can changes'
+        // })
+        
+        app.controller('MainCtrl', function($scope, fooConfig) {
+            $scope.fooConfig = fooConfig
+            angular.extend(fooConfig, {config3: 'I have been extend'})
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>value service</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="app" ng-controller="MainCtrl">
+        <p>{{foo}}</p>
+    </div>
+    <script>
+        var app = angular.module('app', [])
+        
+        app.config(function ($provide) {
+          $provide.factory('foo', function () {
+            var thisIsPrivate = "Private";
+  
+            function getPrivate() {
+              return thisIsPrivate;
+            }
+  
+            return {
+              variable: "This is public",
+              getPrivate: getPrivate
+            };
+          })
+        })
+        
+        // 语法糖
+        // app.factory('foo', function() {
+        //     var thisIsPrivate = "Private";
+        //
+        //     function getPrivate() {
+        //         return thisIsPrivate;
+        //     }
+        //
+        //     return {
+        //         variable: "This is public",
+        //         getPrivate: getPrivate
+        //     };
+        // });
+        
+        app.controller('MainCtrl', function($scope, foo) {
+            $scope.foo = foo.variable
+        })
+    </script>
+</body>
+
+</html>

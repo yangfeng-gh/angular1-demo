@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>value service</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp">
+  <div ng-controller="customerCtrl">
+    <p>{{ myUrl }}</p>
+  </div>
+</div>
+
+<script>
+  var app = angular.module('myApp', []);
+  
+  app.controller('customerCtrl', function($scope, $location) {
+    $scope.myUrl = $location.absUrl();
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>value service</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp">
+  <div ng-controller="customerCtrl3">
+    <p>{{ msg }}</p>
+  </div>
+</div>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('customerCtrl3', function($scope, $timeout) {
+    $scope.msg = 'Hello world';
+    $timeout(function() {
+      $scope.msg = 'Hello angular'
+    }, 2000)
+  })
+</script>
+
+</body>
+</html>

@@ -13,13 +13,26 @@
     </div>
     <script>
         var app = angular.module('app', [])
-        app.service('foo', function() {
+        
+        app.config(function ($provide) {
+          $provide.service('foo', function() {
             var thisIsPrivate = "Private";
             this.variable = "This is public";
             this.getPrivate = function() {
-                return thisIsPrivate;
+              return thisIsPrivate;
             };
-        });
+          })
+        })
+        
+        // 语法糖
+        // app.service('foo', function() {
+        //     var thisIsPrivate = "Private";
+        //     this.variable = "This is public";
+        //     this.getPrivate = function() {
+        //         return thisIsPrivate;
+        //     };
+        // });
+        
         app.controller('MainCtrl', function($scope, foo) {
             $scope.foo = foo.variable
         })
