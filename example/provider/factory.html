@@ -2,53 +2,55 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>value service</title>
-    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+  <meta charset="UTF-8">
+  <title>value service</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
 </head>
 
 <body>
-    <div ng-app="app" ng-controller="MainCtrl">
-        <p>{{public}}</p>
-        <p>{{private}}</p>
-    </div>
-    <script>
-        var app = angular.module('app', [])
+<div ng-app="app" ng-controller="MainCtrl">
+  <p>{{public}}</p>
+  <p>{{private}}</p>
+</div>
+<script>
+  var app = angular.module('app', [])
 
-        app.config(function ($provide) {
-          $provide.factory('myFactory', function () {
-            var foo = "This is Private";
+  app.config(function ($provide) {
+    $provide.factory('myFactory', function () {
+      var foo = "This is Private";
 
-            function getPrivate() {
-              return foo;
-            }
+      function getPrivate() {
+        return foo;
+      }
 
-            return {
-              public: "This is public",
-              private: getPrivate
-            };
-          })
-        })
+      return {
+        public: "This is public",
+        private: getPrivate
+      };
+    })
+  });
 
-        // 语法糖
-        // app.factory('myFactory', function() {
-        //     var foo = "Private";
-        //
-        //     function getPrivate() {
-        //         return foo;
-        //     }
-        //
-        //     return {
-        //          public: "This is public",
-        //          private: getPrivate
-        //     };
-        // });
+  /*
+  // 语法糖
+  app.factory('myFactory', function() {
+      var foo = "Private";
 
-        app.controller('MainCtrl', function($scope, myFactory) {
-            $scope.public = myFactory.public
-            $scope.private = myFactory.private()
-        })
-    </script>
+      function getPrivate() {
+          return foo;
+      }
+
+      return {
+           public: "This is public",
+           private: getPrivate
+      };
+  });
+  */
+
+  app.controller('MainCtrl', function ($scope, myFactory) {
+    $scope.public = myFactory.public;
+    $scope.private = myFactory.private()
+  })
+</script>
 </body>
 
 </html>
