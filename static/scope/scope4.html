@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>根作用域</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp">
+        <h1>{{ lastname }} 家族成员：</h1>
+        <ul ng-controller="myCtrl">
+            <li ng-repeat="x in names">{{ x }} {{ $root.lastname }}</li>
+        </ul>
+        <ul ng-controller="myCtrl2">
+            <li ng-repeat="x in names">{{ x }} {{ lastname }}</li>
+        </ul>
+    </div>
+    <script>
+        var app = angular.module('myApp', [])
+        app.controller('myCtrl', function($scope, $rootScope) {
+            $scope.names = ['Emil', 'Tobias', 'Linus']
+            $rootScope.lastname = 'Refsnes'
+        })
+        app.controller('myCtrl2', function($scope, $rootScope) {
+            $scope.names = ['yvan', 'tom', 'james']
+            $rootScope.lastname = 'yang' // 全局作用域中的属性后面的赋值会覆盖前面的赋值
+        })
+    </script>
+</body>
+
+</html>
