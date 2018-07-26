@@ -15,24 +15,24 @@
 <script>
   var app = angular.module('app', [])
 
-  app.config(function ($provide) {
-    $provide.service('foo', function () {
-      var thisIsPrivate = "Private";
-      this.variable = "This is public";
-      this.getPrivate = function () {
-        return thisIsPrivate;
-      };
-    })
-  })
+  // app.config(function ($provide) {
+  //   $provide.service('foo', function () {
+  //     var _private = "Private";
+  //     this.variable = "This is public";
+  //     this.getPrivate = function () {
+  //       return _private;
+  //     };
+  //   })
+  // })
 
   // 语法糖
-  // app.service('foo', function() {
-  //     var thisIsPrivate = "Private";
-  //     this.variable = "This is public";
-  //     this.getPrivate = function() {
-  //         return thisIsPrivate;
-  //     };
-  // });
+  app.service('foo', function() {
+      var _private = "Private";
+      this.variable = "This is public";
+      this.getPrivate = function() {
+          return _private;
+      };
+  });
 
   app.controller('MainCtrl', function ($scope, foo) {
     $scope.foo = foo.variable;

@@ -41,14 +41,14 @@
 
       return {
            public: "This is public",
-           private: getPrivate
+           getPrivate: getPrivate
       };
   });
   */
 
   app.controller('MainCtrl', function ($scope, myFactory) {
     $scope.public = myFactory.public;
-    $scope.private = myFactory.private()
+    $scope.private = myFactory.getPrivate()
   })
 </script>
 </body>
