@@ -15,24 +15,25 @@
 <script>
   var app = angular.module('app', [])
 
-  app.config(function ($provide) {
-    $provide.service('foo', function () {
-      var thisIsPrivate = "Private";
+  app.service('foo', function() {
+      var thisIsPrivate = 'private';
+      this.name = 'bill';
       this.variable = "This is public";
-      this.getPrivate = function () {
-        return thisIsPrivate;
+      this.getPrivate = function() {
+          return thisIsPrivate;
       };
-    })
-  })
+      this.setName = function (name) {
+        console.log(this.name);
+        this.name = name;
+      }
+  });
 
-  // 语法糖
-  // app.service('foo', function() {
-  //     var thisIsPrivate = "Private";
-  //     this.variable = "This is public";
-  //     this.getPrivate = function() {
-  //         return thisIsPrivate;
-  //     };
-  // });
+  /*
+  // 只有provider在定义后可以再配置
+  app.config(function (fooProvider) { // angular.js:38 Uncaught Error: [$injector:modulerr]
+    fooProvider.setName('linus');
+  });
+  */
 
   app.controller('MainCtrl', function ($scope, foo) {
     $scope.foo = foo.variable;
