@@ -27,11 +27,11 @@
 
   // 语法糖
   app.service('foo', function() {
-      var _private = "Private";
-      this.variable = "This is public";
-      this.getPrivate = function() {
-          return _private;
-      };
+    var _private = "Private";
+    this.variable = "This is public";
+    this.getPrivate = function() {
+      return _private;
+    };
   });
 
   app.controller('MainCtrl', function ($scope, foo) {
