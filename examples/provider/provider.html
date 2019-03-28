@@ -1,73 +1,68 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>value service</title>
-    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
-  </head>
 
-  <body>
-    <input type="radio" name="radioGroup" checked="false" />
-    <div ng-app="myApp" ng-controller="myCtrl">
-      <p>{{ lastName }}</p>
-      <p>{{ test.a }}</p>
-      <p>{{ data }}</p>
-    </div>
-    <script>
-      var app = angular.module("myApp", []);
+<head>
+  <meta charset="UTF-8">
+  <title>value service</title>
+  <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
 
-      // 不能在回调中注入其他服务
-      app.provider("myProvider", function() {
-        var name = "";
-        var test = { a: 1, b: 2 };
+<body>
+<input type="radio" name="radioGroup">
+<div ng-app="myApp" ng-controller="myCtrl">
+  <p>{{lastName}}</p>
+  <p>{{test.a}}</p>
+  <p>{{data}}</p>
+</div>
+<script>
+  var app = angular.module('myApp', []);
 
-        //注意的是，setter方法必须是(set+变量首字母大写)格式
-        this.setName = function(newName) {
-          name = newName;
-        };
+  app.provider('myProvider', function () {
+    var name = "";
+    var test = {"a": 1, "b": 2};
 
-        // 在这里注入其他服务
-        this.$get = function($http, $q) {
-          return {
-            lastName: name,
-            test: test,
-            getData: function() {
-              var deferred = $q.defer();
-              $http
-                .get("http://localhost:8880/cors-demo/common") //读取数据的函数。
-                .success(function(response) {
-                  deferred.resolve(response);
-                })
-                .error(function() {
-                  deferred.reject("error");
-                });
-              return deferred.promise;
-            }
-          };
-        };
-      });
+    //注意的是，setter方法必须是(set+变量首字母大写)格式
+    this.setName = function (newName) {
+      name = newName
+    }
 
-      //需要注意的是：在注入provider时，名字应该是：providerName+Provider
-      app.config(function(myProviderProvider) {
-        myProviderProvider.setName("大圣");
-      });
+    this.$get = function ($http, $q) {
+      return {
+        "lastName": name,
+        "test": test,
+        getData: function () {
+          var deferred = $q.defer();
+          $http.get("http://localhost:8070/cors-demo/common") //读取数据的函数。
+            .success(function (response) {
+              deferred.resolve(response);
+            })
+            .error(function () {
+              deferred.reject("error")
+            });
+          return deferred.promise;
+        }
+      }
+    }
+  });
 
-      app.controller("myCtrl", function($scope, myProvider) {
-        console.log(myProvider.lastName);
-        console.log(myProvider.test.a);
-        $scope.lastName = myProvider.lastName;
-        $scope.test = myProvider.test;
-        myProvider.getData().then(
-          function resolve(data) {
-            $scope.data = data;
-            console.log(data);
-          },
-          function reject(err) {
-            console.log(err);
-          }
-        );
-      });
-    </script>
-  </body>
+  //需要注意的是：在注入provider时，名字应该是：providerName+Provider
+  app.config(function (myProviderProvider) {
+    myProviderProvider.setName("大圣");
+  });
+
+  app.controller('myCtrl', function ($scope, myProvider) {
+    console.log(myProvider.lastName)
+    console.log(myProvider.test.a)
+    $scope.lastName = myProvider.lastName
+    $scope.test = myProvider.test
+    myProvider.getData().then(function resolve(data) {
+      $scope.data = data
+      console.log(data)
+    }, function reject(err) {
+      console.log(err)
+    });
+  });
+</script>
+</body>
+
 </html>

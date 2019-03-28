@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="en">
 
 <head>
@@ -28,7 +27,7 @@
           d.reject("error");
         });
       return d.promise;
-    };
+    }
     return service;
   });
   app.controller('myCtrl', function ($scope, myFactory) {

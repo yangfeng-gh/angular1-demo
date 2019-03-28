@@ -16,7 +16,6 @@
 
 <div ng-app="app" ng-controller="myCtrl">
   <p>{{ msg | reverse }}</p>
-  
   <my-directive></my-directive>
 </div>
 <script>
@@ -26,7 +25,7 @@
   app.controller('myCtrl', function($scope) {
     $scope.msg = '控制器创建成功'
   })
-  
+
   // 添加指令
   app.directive('myDirective', function() {
     return {
@@ -34,14 +33,14 @@
       restrict: 'EA'
     }
   })
-  
+
   // 添加过滤器
   app.filter('reverse', function() {
     return function(text) {
       return text.split('').reverse().join('');
     }
   })
-  
+
 </script>
 
 </body>
