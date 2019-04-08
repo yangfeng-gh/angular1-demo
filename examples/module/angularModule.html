@@ -14,13 +14,13 @@
   <li>控制器通常属于一个模块。</li>
 </ul>
 
-<div ng-app="app" ng-controller="myCtrl">
+<div ng-app="myApp" ng-controller="myCtrl">
   <p>{{ msg | reverse }}</p>
   <my-directive></my-directive>
 </div>
 <script>
   // 创建模块
-  var app = angular.module('app', []);
+  var app = angular.module('myApp', []);
   // 添加控制器
   app.controller('myCtrl', function($scope) {
     $scope.msg = '控制器创建成功'

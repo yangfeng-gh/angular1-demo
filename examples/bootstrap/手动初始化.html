@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>手动初始化</title>
+</head>
+<body>
+    Hello {{ 1 + 2 }}!
+    <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+    <script>
+       angular.element(document).ready(function() {
+         angular.module('myApp', []);
+         angular.bootstrap(document, ['myApp']);
+       });
+    </script>
+  </body>
+</html>

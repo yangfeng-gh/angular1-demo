@@ -40,11 +40,8 @@ angular.module('myApp', []).controller('userCtrl', function($scope) {
       $scope.error = false;
     }
     $scope.incomplete = false;
-    if ($scope.edit && (!$scope.fName.length ||
-        !$scope.lName.length ||
-        !$scope.passw1.length || !$scope.passw2.length)) {
+    if ($scope.edit && (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
       $scope.incomplete = true;
     }
   };
-
 });
